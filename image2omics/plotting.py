@@ -271,8 +271,6 @@ class PlotApplication:
             slope, intercept, r_value, p_value, std_err = linregress(x, y)
             smape_mean = smape(x, np.array([mean_measured] * len(x))[:, 0])
             smape_pred = smape(x, y)
-            pd.DataFrame(smape_mean).to_csv("/home/rm426130/test.csv")
-            pd.DataFrame(smape_pred).to_csv("/home/rm426130/test1.csv")
             p_smape = stats.wilcoxon(smape_pred, smape_mean, alternative="less")[1]
             r2_df.iloc[i] = (
                 r_value**2,
@@ -570,7 +568,6 @@ class PlotApplication:
         all_dfs = pd.read_csv(all_dfs_path, usecols=included_column_names)
         info(f"Read {all_dfs_path}.")
         summary_df = self._calculate_summary_predictability_stats(all_dfs)
-        summary_df.to_csv("/home/rm426130/test.csv")
 
         data = []
         for layer in ["Transcriptomics", "Proteomics"]:
